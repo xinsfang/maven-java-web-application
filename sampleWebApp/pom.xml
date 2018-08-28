@@ -56,6 +56,12 @@ Also show cases the 'Simple Logging Framework - slf4j'.</description>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -94,6 +100,11 @@ Also show cases the 'Simple Logging Framework - slf4j'.</description>
 		<!-- <dependency> <groupId>log4j</groupId> <artifactId>log4j</artifactId> 
 			<version>1.2.17</version> <scope>compile</scope> </dependency> -->
 
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.8.0-beta2</version>
+		</dependency>
 
 		<!-- Unit Test dependencies -->
 		<dependency>
