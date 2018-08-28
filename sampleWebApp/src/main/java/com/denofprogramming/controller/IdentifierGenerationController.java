@@ -4,8 +4,9 @@ import javax.inject.Inject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 //spring imports
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,13 +37,13 @@ import com.denofprogramming.random.RandomGenerator;
  */
 @Controller
 public class IdentifierGenerationController {
-	
+
 	// Using the slf4j api directly - remove comments from this code only after SLF4J dependencies are added, see tutorials. 
-	// private static final Logger logger = LoggerFactory.getLogger(IdentifierGenerationController.class);
+	private static final Logger logger = LoggerFactory.getLogger(IdentifierGenerationController.class);
 
 	// using the log4j api, jar provided by our specific dependency
-	private static final Logger logger = Logger
-			.getLogger("com.denofprogramming.controller.IdentifierGenerationController");
+	/*	private static final Logger logger = Logger
+				.getLogger("com.denofprogramming.controller.IdentifierGenerationController");*/
 
 	// using the JCL api, jar provided by transient dependency via spring-core
 	private Log log = LogFactory.getLog(IdentifierGenerationController.class);
@@ -51,25 +52,23 @@ public class IdentifierGenerationController {
 	private RandomGenerator idGenerator;
 
 	@RequestMapping("/new")
-	public String showNewIdentifier(Model model) {		
+	public String showNewIdentifier(Model model) {
 		// Only as an example to show different logging dependencies
 		// included in our project.
 		// Better, is to use only one and its good practice to use slf4j.
 
 		// debug from JCL
-		log.debug("logging is using Class: "
-				+ log.getClass().getCanonicalName());
+		log.debug("logging is using Class: " + log.getClass().getCanonicalName());
 
 		// debug from log4j
-		logger.debug("logging is using CLass: "
-				+ logger.getClass().getCanonicalName());
-		
+		logger.debug("logging is using CLass: " + logger.getClass().getCanonicalName());
+
 		final GeneratedRandomIdentifier anIdentifier = idGenerator.generate();
-		
+
 		model.addAttribute("creator", anIdentifier.createdBy());
 		model.addAttribute("id", anIdentifier.identifier());
 
-		return "newId";		
+		return "newId";
 
 	}
 
